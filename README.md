@@ -1,6 +1,6 @@
 # IS-GPX-Viewer
 
-## Functional Requirements:
+### Functional Requirements:
 
 * Load GPX
   + Hard code it to be able to locate file.
