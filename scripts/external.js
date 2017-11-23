@@ -10,6 +10,7 @@
 
 $(document).ready(function(){
 
+
       $("input").change(function(e) {
 
         for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
