@@ -25,6 +25,60 @@ function closeNav() {
 }
 
       
+var map;
+function initMap() {
+map = new google.maps.Map(document.getElementById('map'), {
+  center: {lat: 55.86, lng: -4.25},
+  zoom: 12
+});
+}
+
+function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r, g, b) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
+function GreenYellowRed(number, max, min) {
+  var mid = 50;
+  console.log(number);
+  if (number <= mid) {
+    // green to yellow
+    r = Math.floor(255 * (number / mid));
+    g = 255;
+
+  } else {
+    // yellow to red
+    r = 255;
+    g = Math.floor(255 * ((mid-number%mid) / mid));
+  }
+  b = 0;
+
+  return [r, g, b];
+}
+
+var mapEleBounds = function (gpxDoc){
+	var min = null;
+	var max = null;
+	var $xml = $(gpxDoc);
+	$xml.find('trkpt').each(function(){
+		var elevation = $(this).find('ele').text();
+
+		if (min == null || max == null) {
+              min = elevation;
+              max = elevation;
+            }
+
+            max = Math.max(elevation, max);
+            min = Math.min(elevation, min);
+	});
+	console.log(max);
+	console.log(min);
+	return [min ,max];
+};
 
 $(document).ready(function(){
   
@@ -85,8 +139,8 @@ $(document).ready(function(){
           var maxLon = null;
           var minLat = null;
           var minLon = null;
-
-
+          var elevationBounds = mapEleBounds(gpxDoc);
+          console.log(elevationBounds);
           // Iterate through all track segements and find a route.
           $xml.find('trkpt').each(function(){
             // this is where all the reading and writing will happen
@@ -96,7 +150,12 @@ $(document).ready(function(){
             var hr = $(this).find('ns3\\:hr').text();
 
             var cad = $(this).find('ns3\\:cad').text();
-
+            var elevation = $(this).find('ele').text();
+            elepercent = (elevationBounds[1] - elevation)/(elevationBounds[1] - elevationBounds[0]) * 100;
+            console.log(elepercent);
+            var rgb = GreenYellowRed(elepercent, elevationBounds[1], elevationBounds[0]);
+            console.log(rgb);
+            var hex = rgbToHex(rgb[0], rgb[1], rgb[2]);
 
             totalTracks += 1;
             totalHR += parseInt(hr);
@@ -129,7 +188,8 @@ $(document).ready(function(){
                   new google.maps.LatLng(lastLat, lastLon), 
                   new google.maps.LatLng(lat, lon)
                 ],
-              strokeColor: "#D32828",
+
+              strokeColor: hex,
               strokeOpacity: 0.4,
               strokeWeight: 10,
               map: map
