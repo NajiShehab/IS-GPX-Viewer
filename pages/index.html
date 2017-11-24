@@ -14,12 +14,19 @@
 
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <button id="elevation">Overlay Elevation</button>	 
+  <button id="heartrate">Overlay Heartrate</button>
+  <button id="cadence">Overlay Cadence</button>
+  <button id="remove">Remove Overlay</button>
   
-  <!-- shows the data -->
-  <span id="activity-overview"></span> 
 
+  <div id="make-white">
+  	  <p id="file-preview"> No File Selected </p>
 
-  <p id="file-preview"> No File Selected </p>
+	  <!-- shows the data -->
+	  <span id="activity-overview"></span> 
+  </div>
+
   <input id="file-input" type="file" name="gpxfile"/>
 </div>
 
