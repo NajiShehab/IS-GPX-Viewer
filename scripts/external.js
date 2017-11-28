@@ -26,7 +26,7 @@ function openNav() {
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft= "0";
-    document.getElementById("map").style.marginLeft = "0";
+    document.getElementById("map").style.marginLeft = "auto";
 }
 
       
@@ -415,7 +415,7 @@ $(document).ready(function(){
           });
 
           //  Add the overview stats to preview run details...
-          $('#activity-overview').text("Average Heartrate: " + (totalHR/totalTracks) + " Average Cadence: " + (totalCAD/totalTracks));
+          $('#activity-overview').text("Average Heartrate: " +(totalHR/totalTracks)  +"\n Average Cadence: " + (totalCAD/totalTracks));
 
           // Recentre the MAP
           map.setCenter(new google.maps.LatLng(totalLat/totalTracks, totalLon/totalTracks));

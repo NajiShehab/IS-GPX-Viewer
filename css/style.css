@@ -1,14 +1,21 @@
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 #map {
-        transition: margin-left .5s;
-        padding: 20px;
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
+    margin: auto;
+    transition: margin-left .5s;
+    height: 600px;
+    width: 80%;
+    size: 
+}
 
 /* The side navigation menu */
 .sidenav {
@@ -52,6 +59,8 @@
 #main {
     transition: margin-left .5s;
     padding: 20px;
+    height: 75%;
+
 }
 
 #make-white{
@@ -62,4 +71,37 @@
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
+}
+
+/* Create three unequal columns that floats next to each other */
+.column {
+    float: left;
+}
+
+/* Left and right column */
+.column.side {
+    width: 20%;
+    padding-right: 100px;
+}
+
+/* Middle column */
+.column.middle {
+    width: 80%;
+
+
+}
+
+/* Clear floats after the columns */ 
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+
+}
+
+/* Responsive layout - stack on top of each other instead of next to each other */
+@media (max-width: 600px) {
+    .column.side, .column.middle {
+        width: 100%;
+    }
 }
