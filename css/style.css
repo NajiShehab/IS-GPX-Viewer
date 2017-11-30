@@ -7,101 +7,70 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow: hidden; 
 }
 
 #map {
     margin: auto;
     transition: margin-left .5s;
-    height: 600px;
-    width: 80%;
+    height: 100vh;
+    width: 100%;
     size: 
 }
 
-/* The side navigation menu */
-.sidenav {
-    height: 100%; /* 100% Full-height */
-    width: 0; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
-    top: 0;
-    left: 0;
-    background-color: #111; /* Black*/
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 60px; /* Place content 60px from the top */
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+
+#wrapper {
+  padding-left: 250px;
+  transition: all 0.4s ease 0s;
 }
 
-/* The navigation menu links */
-.sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s
+#sidebar-wrapper {
+  margin-left: -250px;
+  left: 250px;
+  width: 250px;
+  background: #fff;
+  position: fixed;
+  height: 100%;
+  overflow-y: auto;
+  z-index: 1000;
+  transition: all 0.4s ease 0s;
 }
 
-/* When you mouse over the navigation links, change their color */
-.sidenav a:hover, .offcanvas a:focus{
-    color: #f1f1f1;
+#page-content-wrapper {
+  width: 100%;
 }
 
-/* Position and style the close button (top right corner) */
-.sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+h1, h4 {
+    text-align: center;
 }
 
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-#main {
-    transition: margin-left .5s;
-    padding: 20px;
-    height: 75%;
+@media (max-width:767px) {
 
-}
-
-#make-white{
-    color: #ffffff
-}
-
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-}
-
-/* Create three unequal columns that floats next to each other */
-.column {
-    float: left;
-}
-
-/* Left and right column */
-.column.side {
-    width: 20%;
-    padding-right: 100px;
-}
-
-/* Middle column */
-.column.middle {
-    width: 80%;
-
-
-}
-
-/* Clear floats after the columns */ 
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-
-}
-
-/* Responsive layout - stack on top of each other instead of next to each other */
-@media (max-width: 600px) {
-    .column.side, .column.middle {
-        width: 100%;
+    #wrapper {
+      padding-left: 0;
     }
+
+    #sidebar-wrapper {
+      left: 0;
+    }
+
+    #wrapper.active {
+      position: relative;
+      left: 250px;
+    }
+
+    #wrapper.active #sidebar-wrapper {
+      left: 250px;
+      width: 250px;
+      transition: all 0.4s ease 0s;
+    }
+
 }

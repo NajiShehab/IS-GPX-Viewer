@@ -12,39 +12,39 @@
 </head>
 <body>
 
-<div id="mySidenav" class="sidenav">
-	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+<div id="wrapper">
 
-	<a href="#">Map</a>
-	<a href="#">Statistics</a>
-	<a href="#">Previous runs</a>
-	<br><br><br><br><br>
+<!-- Sidebar -->
+<div id="sidebar-wrapper">
+	<h1>Team 0 App</h1>
+    <ul class="list-group">
+        <a class="list-group-item list-group-item-action" href="#" id="file-button">Load Map</a>
+        <hr>
+	    <h4>Previous routes</h4>
+	    <hr>
+	    <a class="list-group-item list-group-item-action disabled" href="#">Nevis Running</a>
+	    <a class="list-group-item list-group-item-action disabled" href="#">Everest Running</a>
+	    <hr>
+        <h4>Overlays</h4>
+        <hr>
+	    <a class="list-group-item list-group-item-action disabled overlay" href="#" id="elevation">Overlay Elevation</a>
+	    <a class="list-group-item list-group-item-action disabled overlay" href="#" id="heartrate">Overlay Heartrate</a>
+	    <a class="list-group-item list-group-item-action disabled overlay" href="#" id="cadence">Overlay Cadence</a>
+	    <a class="list-group-item list-group-item-action disabled overlay" href="#" id="remove">Remove Overlay</a>
 
-	<div id="make-white">
-		<input id="file-input" type="file" name="gpxfile"/>
-	</div>
-
-  
+	    
+    </ul>
 </div>
+<input id="file-input"  type="file" name="gpxfile" style="display: none"/>
 
+<div id="page-content-wrapper">
 <div id="main">
-  <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
 
-  	<div class="row">
-	    <div class="column middle">
-	        <div id="map"></div>
-	    </div>
-	    <div class="column side">
-
-	       	<button id="elevation">Overlay Elevation</button>	 
-			<button id="heartrate">Overlay Heartrate</button>
-			<button id="cadence">Overlay Cadence</button>
-			<button id="remove">Remove Overlay</button>
-	    </div>
-	</div>
+	<div id="map"></div>
 	<br><br>
 	<!-- shows the data -->
 	<span id="activity-overview"></span> 
+</div>
 </div>
 
 

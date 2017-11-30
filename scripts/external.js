@@ -130,6 +130,14 @@ function clearLines(){
 
 
 $(document).ready(function(){
+
+     $('[data-toggle="tooltip"]').tooltip();   
+     $('#file-button').on('click', function() {
+
+          $('#file-input').trigger('click');
+          $('#file-button').text("Change Map");
+          $(".overlay").toggleClass('disabled ');
+      });
   
       $("input").change(function(e) {
 
@@ -137,13 +145,8 @@ $(document).ready(function(){
 
           var file = e.originalEvent.srcElement.files[i];
 
-          var img = document.createElement("img");
           var reader = new FileReader();
-          reader.onloadend = function() {
-             img.src = reader.result;
-          }
           reader.readAsDataURL(file);
-          $("input").after(img);
         }
       });
 
