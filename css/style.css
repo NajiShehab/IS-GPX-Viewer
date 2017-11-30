@@ -19,7 +19,23 @@ html, body {
     size: 
 }
 
+#overlaysec{
+    display: flex;
+    justify-content: space-between;
+    background: #00ff00; /* Old browsers */
+background: -moz-linear-gradient(left, #00ff00 0%, #ffff00 50%, #ffff00 50%, #ff0000 99%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left, #00ff00 0%,#ffff00 50%,#ffff00 50%,#ff0000 99%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right, #00ff00 0%,#ffff00 50%,#ffff00 50%,#ff0000 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ff00', endColorstr='#ff0000',GradientType=1 ); /* IE6-9 */
+   
+   
+}
 
+#least, #most {
+    color: #fff;
+    vertical-align: middle;
+    margin: 0;
+   }
 #wrapper {
   padding-left: 250px;
   transition: all 0.4s ease 0s;

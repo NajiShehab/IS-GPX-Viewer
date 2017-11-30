@@ -151,6 +151,8 @@ $(document).ready(function(){
       });
 
       $("#elevation").click(function(){
+        $("#least").text(Math.round(elevationBounds[0]) + "m");
+        $("#most").text(Math.round(elevationBounds[1]) + "m");
       	clearLines();
       	var lastLat = null;
         var lastLon = null;
@@ -195,6 +197,8 @@ $(document).ready(function(){
       });
 
       $("#heartrate").click(function(){
+        $("#least").text(Math.round(hrbounds[0]) + "bpm");
+        $("#most").text(Math.round(hrbounds[1]) + "bpm");
       	clearLines();
       	var lastLat = null;
         var lastLon = null;
@@ -229,7 +233,7 @@ $(document).ready(function(){
               lastLat = lat;
               lines.push(line);
           }
-
+          
 
             //  For testing to see if values coming in are mental
             //console.log("LAT " + lat + " LON " + lon + " HR " + hr + " CAD " + cad);
@@ -238,6 +242,8 @@ $(document).ready(function(){
       });
 
       $("#remove").click(function(){
+        $("#least").text("");
+        $("#most").text("");
       	clearLines();
       	var lastLat = null;
         var lastLon = null;
@@ -276,6 +282,8 @@ $(document).ready(function(){
           });
       });
       $("#cadence").click(function(){
+        $("#least").text(Math.round(cadbounds[0]) + "RPM");
+        $("#most").text(Math.round(cadbounds[1]) + "RPM");
       	clearLines();
       	var lastLat = null;
         var lastLon = null;
