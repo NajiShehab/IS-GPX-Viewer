@@ -115,7 +115,7 @@ function clearLines(){
 }
 
 
-$(document).ready(function(){
+window.onload = function () {
 
      $('[data-toggle="tooltip"]').tooltip();   
      $('#file-button').on('click', function() {
@@ -315,6 +315,12 @@ $(document).ready(function(){
 
 
       $('#file-input').change(function () {
+		  
+		var elevationarray = [];
+        var heartrate = [];
+        var cadence = [];
+        var timeArray = [];
+		
         var reader = new FileReader();
         reader.onload = function(e) {
           // e.target.result should contain the text
@@ -324,6 +330,7 @@ $(document).ready(function(){
 
           var gpxDoc = $.parseXML(text); 
           $xml = $(gpxDoc);
+		  var fileupload = true;
 
           // Find Name of Activity
           var $name = $xml.find('name');
@@ -360,12 +367,22 @@ $(document).ready(function(){
 
             var cad = $(this).find('ns3\\:cad').text();
             var elevation = $(this).find('ele').text();
+			
+			var gpxTime = $(this).find('time').text();
+
+            var time = new Date(gpxTime);
+			
            
             totalTracks += 1;
             totalHR += parseInt(hr);
             totalCAD += parseInt(cad);
             totalLat += parseFloat(lat);
             totalLon += parseFloat(lon);
+			
+			cadence.push(cad);
+            elevationarray.push(parseFloat(elevation).toFixed(2));
+            heartrate.push(parseFloat(hr));
+            timeArray.push(time.toLocaleTimeString())
 
             //  Get the figures for the bounding box
             if (maxLat == null || maxLon == null ||  minLat == null || minLon == null ) {
@@ -410,6 +427,160 @@ $(document).ready(function(){
             //console.log("LAT " + lat + " LON " + lon + " HR " + hr + " CAD " + cad);
           
           });
+		  
+		  if(fileupload == true){
+			  var ctx = document.getElementById("myChart").getContext('2d');
+			  var myChart = new Chart(ctx, {
+              type: 'line',
+              data: {
+                labels: timeArray,
+                datasets: [{
+                    label: "Elevation (m)",
+                    data: elevationarray,
+                    borderWidth: 1,
+                    borderColor: 'rgba(255,99,132,1)'
+                }]
+              },
+              options: {
+                title: {
+                    text: "Elevation",
+                    fontSize: 18,
+                    display: true
+                },
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            labelString: "Time",
+                            fontSize: 14,
+                            display: true
+                        },
+                        ticks: {
+                            beginAtZero: false,
+                            maxTicksLimit: 2,
+                            maxRotation: 0,
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            labelString: "Elevation (m)",
+                            fontSize: 14,
+                            display: true
+                        },
+                        ticks: {
+                            beginAtZero: false
+                        }
+                    }]
+                }
+            }
+        });
+		
+		var ctx = document.getElementById("heartRate").getContext('2d');
+        var heartRate = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: timeArray,
+                datasets: [{
+                    label: "Heart Rate (BPM)",
+                    data: heartrate,
+                    borderWidth: 1,
+                    borderColor: 'rgba(255,99,132,1)'
+                }]
+            },
+            options: {
+                title: {
+                    text: "Heart Rate",
+                    fontSize: 18,
+                    display: true
+                },
+                legend: {
+                    display: false,
+                },
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            labelString: "Time",
+                            fontSize: 14,
+                            display: true
+                        },
+                        ticks: {
+                            beginAtZero: false,
+                            maxTicksLimit: 2,
+                            maxRotation: 0,
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            labelString: "Heart Rate (BPM)",
+                            fontSize: 14,
+                            display: true
+                        },
+                        ticks: {
+                            beginAtZero: false
+                        }
+                    }]
+                }
+            }
+        });
+
+
+        var ctx = document.getElementById("Cadence").getContext('2d');
+        var Cadence = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: timeArray,
+                datasets: [{
+                    data: cadence,
+                    label: "Cadence (RPM)",
+                    borderWidth: 1,
+                    borderColor: 'rgba(255,99,132,1)'
+                }]
+            },
+            options: {
+                title: {
+                    text: "Cadence",
+                    fontSize: 18,
+                    display: true
+                },
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            labelString: "Time",
+                            fontSize: 14,
+                            display: true
+                        },
+                        ticks: {
+                            beginAtZero: false,
+                            maxTicksLimit: 2,
+                            maxRotation: 0,
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            labelString: "Cadence (RPM)",
+                            fontSize: 14,
+                            display: true
+                        },
+                        ticks: {
+                            beginAtZero: false
+                        }
+                    }]
+                }
+            }
+        });
+		  }else{
+			  document.write("no stats to show");
+		  }
+
+        
+        setTimeout(function() { myChart.update(); },500);
+		setTimeout(function() { heartRate.update(); },500);
+		setTimeout(function() { Cadence.update(); },500);
 
           //  Add the overview stats to preview run details...
           $('#activity-overview').text("Average Heartrate: " +(totalHR/totalTracks)  +"\n Average Cadence: " + (totalCAD/totalTracks));
@@ -427,5 +598,5 @@ $(document).ready(function(){
 
       
       });
-    });
+    };
     

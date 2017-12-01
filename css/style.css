@@ -19,6 +19,12 @@ html, body {
     size: 
 }
 
+#graphs {
+	
+	position: relative;
+	top: 100px;
+}
+
 #overlaysec{
     display: flex;
     justify-content: space-between;
@@ -70,7 +76,7 @@ h1, h4 {
 }
 
 #bottom{
-  position: absolute;
+  position: relative;
   bottom: 15px;
   padding: 45px;
 }
