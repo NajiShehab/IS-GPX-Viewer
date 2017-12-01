@@ -48,6 +48,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ff00', end
 }
 
 #sidebar-wrapper {
+    overflow-y:scroll;
   margin-left: -250px;
   left: 250px;
   width: 250px;

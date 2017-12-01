@@ -5,6 +5,7 @@ var lines = [];
 var elevationBounds;
 var hrbounds;
 var cadbounds; 
+var clicks = 300;
 
 function initMap() {
 map = new google.maps.Map(document.getElementById('map'), {
@@ -123,6 +124,7 @@ window.onload = function () {
           $('#file-input').trigger('click');
           $('#file-button').text("Change Map");
           $(".overlay").toggleClass('disabled ');
+          $(".graph").toggleClass('disabled ');
       });
   
       $("input").change(function(e) {
@@ -134,6 +136,22 @@ window.onload = function () {
           var reader = new FileReader();
           reader.readAsDataURL(file);
         }
+      });
+
+      $("#elegraph").click(function(){
+        $(".graph").toggleClass(' disabled');
+        $(".nav").toggleClass('disabled ');
+         $('html,body').animate({
+        scrollTop: $("#eleChart").offset().top},
+        'slow');
+      });
+
+      $("#mapnav").click(function(){
+        $(".nav").toggleClass(' disabled');
+        $(".graph").toggleClass('disabled ');
+         $('html,body').animate({
+        scrollTop: 0},
+        'slow');
       });
 
       $("#elevation").click(function(){
@@ -429,7 +447,7 @@ window.onload = function () {
           });
 		  
 		  if(fileupload == true){
-			  var ctx = document.getElementById("myChart").getContext('2d');
+			  var ctx = document.getElementById("eleChart").getContext('2d');
 			  var myChart = new Chart(ctx, {
               type: 'line',
               data: {
@@ -477,7 +495,7 @@ window.onload = function () {
             }
         });
 		
-		var ctx = document.getElementById("heartRate").getContext('2d');
+		var ctx = document.getElementById("heartChart").getContext('2d');
         var heartRate = new Chart(ctx, {
             type: 'line',
             data: {
@@ -526,7 +544,7 @@ window.onload = function () {
         });
 
 
-        var ctx = document.getElementById("Cadence").getContext('2d');
+        var ctx = document.getElementById("cadChart").getContext('2d');
         var Cadence = new Chart(ctx, {
             type: 'line',
             data: {
@@ -578,13 +596,12 @@ window.onload = function () {
 		  }
 
         
-        setTimeout(function() { myChart.update(); },500);
+    setTimeout(function() { myChart.update(); },500);
 		setTimeout(function() { heartRate.update(); },500);
 		setTimeout(function() { Cadence.update(); },500);
 
           //  Add the overview stats to preview run details...
-          $('#activity-overview').text("Average Heartrate: " +(totalHR/totalTracks)  +"\n Average Cadence: " + (totalCAD/totalTracks));
-
+        
           // Recentre the MAP
           map.setCenter(new google.maps.LatLng(totalLat/totalTracks, totalLon/totalTracks));
 

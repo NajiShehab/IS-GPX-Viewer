@@ -8,6 +8,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="../scripts/external.js"></script>
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 	<link rel="stylesheet" href="../css/style.css">
 </head>
@@ -41,7 +42,10 @@
 	    <a class="list-group-item list-group-item-action disabled overlay" href="#" id="heartrate">Overlay Heartrate</a>
 	    <a class="list-group-item list-group-item-action disabled overlay" href="#" id="cadence">Overlay Cadence</a>
 	    <a class="list-group-item list-group-item-action disabled overlay" href="#" id="remove">Remove Overlay</a>
-		<a class="list-group-item list-group-item-action disabled overlay" href="#" id="stats">View Statistics</a>
+
+		<h4>Navigation</h4>
+		<a class="list-group-item list-group-item-action disabled graph" href="#" id="elegraph">View Graphs</a>
+		<a class="list-group-item list-group-item-action disabled nav" href="#" id="mapnav">View Map</a>
 
 	    
     </ul>
@@ -63,13 +67,15 @@
 	<!-- shows the data -->
 	<span id="activity-overview"></span> 
 </div>
+<div id ="graphs">
+	<canvas hidden id="eleChart" style="height: 255px; width: 100%;"></canvas>
+	<canvas hidden id="heartChart" style="height: 255px; width: 100%;"></canvas>
+	<canvas hidden id="cadChart" style="height: 255px; width: 100%;"></canvas>
+	<br>
+</div>
 </div>
 
-<div id ="graphs">
-	<canvas hidden id="myChart" style="height: 300px; width: 100%;"></canvas>
-	<canvas hidden id="heartRate" style="height: 300px; width: 100%;"></canvas>
-	<canvas hidden id="Cadence" style="height: 300px; width: 100%;"></canvas>
-</div>
+
 
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyWrupq5gsla08nkO7nkASDKEt_IJMUms&callback=initMap"
